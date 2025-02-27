@@ -18,7 +18,7 @@
             <configuration>
               <transformers>
                 <transformer>
-                  <mainClass>Server</mainClass>
+                  <mainClass>ru.almaz.server.Server</mainClass>
                 </transformer>
               </transformers>
             </configuration>
