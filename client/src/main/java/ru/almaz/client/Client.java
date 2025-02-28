@@ -36,7 +36,6 @@ public class Client {
             Scanner scanner = new Scanner(System.in);
             while(true){
                 String msg = scanner.nextLine();
-                System.out.println("client: " + msg);
                 if(msg.equals("exit")){
                     break;
                 }

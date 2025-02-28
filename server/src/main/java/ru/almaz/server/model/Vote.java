@@ -1,8 +1,6 @@
 package ru.almaz.server.model;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.ArrayList;
@@ -17,8 +15,10 @@ public class Vote {
 
     private List<AnswerOption> answerOptions = new ArrayList<>();
 
-    private String username="";
+    private String userCreator ="";
 
+    @Getter
+    @Setter
     public static class AnswerOption {
         private String answer;
 
