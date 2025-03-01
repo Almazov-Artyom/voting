@@ -1,5 +1,6 @@
 package ru.almaz.server;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
@@ -7,6 +8,7 @@ import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.handler.codec.string.StringDecoder;
 import io.netty.handler.codec.string.StringEncoder;
+import lombok.Value;
 import ru.almaz.server.handler.MainHandler;
 import ru.almaz.server.storage.TopicStorage;
 
@@ -16,9 +18,13 @@ import java.util.Scanner;
 
 public class Server {
 
-    private static TopicStorage topicStorage = new TopicStorage();
+    private static final int PORT = 8080;
 
     public static void main(String[] args) throws Exception {
+        new Server().start();
+    }
+
+    public void start() {
         EventLoopGroup bossGroup = new NioEventLoopGroup(1);
         EventLoopGroup workerGroup = new NioEventLoopGroup();
 
@@ -33,18 +39,19 @@ public class Server {
                         }
                     });
 
-            ChannelFuture future = bootstrap.bind(8080).sync();
-            System.out.println("ru.almaz.server.model.Server started on port 8080");
+            ChannelFuture future = bootstrap.bind(PORT).sync();
+            System.out.println("Server started on port 8080");
             Scanner scanner = new Scanner(System.in);
             while (true) {
                 String line = scanner.nextLine();
                 if (line.equals("exit")) {
                     break;
                 }
-                topicStorage.saveTopicsToFile(line);
-
+                TopicStorage.saveTopicsToFile(line);
             }
-            future.channel().closeFuture().sync();
+            scanner.close();
+            future.channel().close().sync();
+
         } catch (Exception e) {
             e.printStackTrace();
         } finally {

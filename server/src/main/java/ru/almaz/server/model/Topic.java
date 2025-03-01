@@ -11,7 +11,7 @@ import java.util.List;
 public class Topic {
     private String name;
 
-    private List<Vote> votes;
+    private final List<Vote> votes;
 
     public Topic(String name) {
         this.name = name;

@@ -2,10 +2,11 @@ package ru.almaz.server.service;
 
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandlerContext;
-import lombok.RequiredArgsConstructor;
+import org.apache.commons.lang3.tuple.Pair;
 import ru.almaz.server.handler.AnswerHandler;
 import ru.almaz.server.handler.MainHandler;
 import ru.almaz.server.handler.VoteHandler;
+import ru.almaz.server.manager.VoteManager;
 import ru.almaz.server.model.Topic;
 import ru.almaz.server.model.Vote;
 import ru.almaz.server.service.session.AnswerSession;
@@ -13,47 +14,43 @@ import ru.almaz.server.service.session.VoteCreateSession;
 import ru.almaz.server.storage.TopicStorage;
 import ru.almaz.server.storage.UserStorage;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
-@RequiredArgsConstructor
+
 public class VoteService {
-
-    private static final TopicStorage topicStorage = new TopicStorage();
-
-    private static final UserStorage userStorage = new UserStorage();
 
     private static final Map<Channel, VoteCreateSession> activeCreateSessions = new HashMap<>();
 
     private static final Map<Channel, AnswerSession> activeAnswerSessions = new HashMap<>();
 
-    private static Optional<Vote> getVoteFromTopic(ChannelHandlerContext ctx, String msg) {
+    private static Optional<Pair<Topic, Vote>> getTopicAndVote(ChannelHandlerContext ctx, String msg) {
         String[] parts = msg.split(" -t=| -v=");
         String topicName = parts[1].trim();
         String voteName = parts[2].trim();
-        Topic topic = topicStorage.findTopicByName(topicName).orElse(null);
-        if (topic != null) {
-            Vote vote = topicStorage.findVoteByTopic(topic, voteName).orElse(null);
-            if (vote == null) {
-                ctx.writeAndFlush("Такого голосования не существует\n");
-            } else {
-                return Optional.of(vote);
-            }
-        } else {
-            ctx.writeAndFlush("Такого топика не существует\n");
+
+        Topic topic = TopicStorage.findTopicByName(topicName).orElse(null);
+        if (topic == null) {
+            ctx.writeAndFlush("Такого голосования не существует\n");
+            return Optional.empty();
         }
-        return Optional.empty();
+
+        Vote vote = VoteManager.findVoteByTopic(topic, voteName).orElse(null);
+        if (vote == null) {
+            ctx.writeAndFlush("Такого голосования не существует\n");
+            return Optional.empty();
+        }
+
+        return Optional.of(Pair.of(topic, vote));
     }
 
     public static void startCreateVote(ChannelHandlerContext ctx, String msg) {
         String topicName = msg.substring("create vote -t=".length()).trim();
 
-        if (!topicStorage.isTopicExists(topicName)) {
+        if (!TopicStorage.isTopicExists(topicName)) {
             ctx.writeAndFlush("Такого топика не существует\n");
         } else {
-            Topic topic = topicStorage.findTopicByName(topicName).orElse(null);
+            Topic topic = TopicStorage.findTopicByName(topicName).orElse(null);
             activeCreateSessions.put(ctx.channel(), new VoteCreateSession(topic));
             ctx.writeAndFlush("Введите название голосования\n");
             ctx.pipeline().removeLast();
@@ -67,11 +64,11 @@ public class VoteService {
             case 0:
                 if (msg.isEmpty())
                     ctx.writeAndFlush("Название голосования не может быть пустым\n");
-                else if (topicStorage.isVoteInTopicExists(session.getTopic(), msg)) {
+                else if (VoteManager.isVoteInTopicExists(session.getTopic(), msg)) {
                     ctx.writeAndFlush("Такое голосование уже есть\n");
                 } else {
                     session.setVoteName(msg);
-                    session.setVoteUserCreator(userStorage.findUserByChannel(ctx.channel()));
+                    session.setVoteUserCreator(UserStorage.findUserByChannel(ctx.channel()));
                     session.nextStep();
                     ctx.writeAndFlush("Введите тему голосования\n");
                 }
@@ -121,7 +118,8 @@ public class VoteService {
     }
 
     public static void view(ChannelHandlerContext ctx, String msg) {
-        getVoteFromTopic(ctx, msg).ifPresent(vote -> {
+        getTopicAndVote(ctx, msg).ifPresent(pair -> {
+            Vote vote = pair.getRight();
             ctx.writeAndFlush(vote.getDescription() + "\n");
             vote.getAnswerOptions().forEach(answerOption ->
                     ctx.writeAndFlush(
@@ -134,8 +132,9 @@ public class VoteService {
     }
 
     public static void startVote(ChannelHandlerContext ctx, String msg) {
-        getVoteFromTopic(ctx, msg).ifPresent(vote -> {
-            if (vote.getAnswerUsers().contains(userStorage.findUserByChannel(ctx.channel()))) {
+        getTopicAndVote(ctx, msg).ifPresent(pair -> {
+            Vote vote = pair.getRight();
+            if (vote.getAnswerUsers().contains(UserStorage.findUserByChannel(ctx.channel()))) {
                 ctx.writeAndFlush("Вы уже отвечали\n");
                 return;
             }
@@ -166,7 +165,7 @@ public class VoteService {
         }
 
         if (numberAnswer > 0 && numberAnswer <= answerSession.getCountAnswers()) {
-            answerSession.toAnswer(numberAnswer, userStorage.findUserByChannel(ctx.channel()));
+            answerSession.toAnswer(numberAnswer, UserStorage.findUserByChannel(ctx.channel()));
             ctx.pipeline().removeLast();
             ctx.pipeline().addLast(new MainHandler());
         } else {
@@ -175,25 +174,14 @@ public class VoteService {
     }
 
     public static void deleteVote(ChannelHandlerContext ctx, String msg) {
-        String[] parts = msg.split(" -t=| -v=");
-        String topicName = parts[1].trim();
-        String voteName = parts[2].trim();
-        Topic topic = topicStorage.findTopicByName(topicName).orElse(null);
-        if (topic == null) {
-            ctx.writeAndFlush("Такого топика не существует\n");
-            return;
-        }
-        Vote vote = topicStorage.findVoteByTopic(topic, voteName).orElse(null);
-        if (vote == null) {
-            ctx.writeAndFlush("Такого голосования не существует\n");
-            return;
-        }
-        if (vote.getUserCreator().equals(userStorage.findUserByChannel(ctx.channel()))) {
-            topic.getVotes().remove(vote);
-        } else {
-            ctx.writeAndFlush("Голосование может удалить только пользователь, создавший его\n");
-        }
-
+        getTopicAndVote(ctx, msg).ifPresent(pair -> {
+            Topic topic = pair.getLeft();
+            Vote vote = pair.getRight();
+            if (vote.getUserCreator().equals(UserStorage.findUserByChannel(ctx.channel()))) {
+                topic.getVotes().remove(vote);
+            } else {
+                ctx.writeAndFlush("Голосование может удалить только пользователь, создавший его\n");
+            }
+        });
     }
-
 }

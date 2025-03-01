@@ -7,11 +7,6 @@ import io.netty.channel.SimpleChannelInboundHandler;
 public class Handler extends SimpleChannelInboundHandler<String> {
 
     @Override
-    public void channelActive(ChannelHandlerContext ctx) throws Exception {
-        System.out.println("You are connected!");
-    }
-
-    @Override
     public void channelRead0(ChannelHandlerContext ctx, String msg) throws Exception {
         System.out.print(msg);
 

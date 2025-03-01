@@ -3,9 +3,6 @@ package ru.almaz.server.handler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import ru.almaz.server.service.LoginService;
-import ru.almaz.server.service.TopicService;
-import ru.almaz.server.service.VoteService;
-
 
 public class MainHandler extends SimpleChannelInboundHandler<String> {
     private final CommandHandler commandHandler = new CommandHandler();
@@ -13,6 +10,7 @@ public class MainHandler extends SimpleChannelInboundHandler<String> {
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
         System.out.println("user connected" + ctx);
+        ctx.writeAndFlush("Вы подключены\n");
     }
 
     @Override

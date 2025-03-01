@@ -10,9 +10,10 @@ import java.util.Map;
 import java.util.function.BiConsumer;
 
 public class CommandHandler {
-    private final Map<String, BiConsumer<ChannelHandlerContext, String>> commands = new HashMap<>();
+    private final Map<String, BiConsumer<ChannelHandlerContext, String>> commands;
 
     public CommandHandler() {
+        commands = new HashMap<>();
         commands.put("^create topic -n=.+$", TopicService::createTopic);
         commands.put("^view$", TopicService::view);
         commands.put("^view -t=([\\s\\S]+)$", TopicService::viewPrefixT);

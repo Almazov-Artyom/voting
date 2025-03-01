@@ -12,12 +12,15 @@ public class VoteCreateSession {
 
     private int optionsCount;
 
-    private Topic topic;
+    private final Topic topic;
 
-    private final Vote vote = new Vote();
+    private final Vote vote;
 
     public VoteCreateSession(Topic topic) {
         this.topic = topic;
+        this.vote = new Vote();
+        this.step = 0;
+        this.optionsCount = 0;
     }
 
     public void nextStep() {
@@ -31,6 +34,7 @@ public class VoteCreateSession {
     public void setVoteName(String voteName) {
         vote.setName(voteName);
     }
+
     public void setVoteUserCreator(String userCreator) {
         vote.setUserCreator(userCreator);
     }

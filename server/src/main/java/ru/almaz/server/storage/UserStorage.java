@@ -6,25 +6,25 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class UserStorage {
-    private static final Map<Channel,String> users = new HashMap<>();
+    private static final Map<Channel, String> users = new HashMap<>();
 
-    public void deleteUser(Channel channel) {
+    public static void deleteUser(Channel channel) {
         users.remove(channel);
     }
 
-    public void saveUser(Channel channel, String username){
-        users.put(channel,username);
+    public static void saveUser(Channel channel, String username) {
+        users.put(channel, username);
     }
 
-    public boolean isUserExistByChannel(Channel channel){
+    public static boolean isUserExistByChannel(Channel channel) {
         return users.containsKey(channel);
     }
 
-    public boolean isUserExistByUsername(String username){
+    public static boolean isUserExistByUsername(String username) {
         return users.containsValue(username);
     }
 
-    public String findUserByChannel(Channel channel){
+    public static String findUserByChannel(Channel channel) {
         return users.get(channel);
     }
 

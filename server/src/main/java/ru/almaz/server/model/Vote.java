@@ -9,25 +9,35 @@ import java.util.List;
 @Getter
 @Setter
 public class Vote {
-    private String name = "";
+    private String name;
 
-    private String description = "";
+    private String description;
 
-    private List<AnswerOption> answerOptions = new ArrayList<>();
+    private final List<AnswerOption> answerOptions;
 
-    private String userCreator = "";
+    private String userCreator;
 
-    private List<String> answerUsers = new ArrayList<>();
+    private final List<String> answerUsers;
+
+    public Vote() {
+        name = "";
+        description = "";
+        answerOptions = new ArrayList<>();
+        userCreator = "";
+        answerUsers = new ArrayList<>();
+
+    }
 
     @Getter
     @Setter
     public static class AnswerOption {
         private String answer;
 
-        private long countUsers;
+        private int countUsers;
 
         public AnswerOption(String answer) {
             this.answer = answer;
+            countUsers = 0;
         }
     }
 

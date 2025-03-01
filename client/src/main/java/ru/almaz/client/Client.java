@@ -43,7 +43,7 @@ public class Client {
                 channel.writeAndFlush(msg);
             }
             scanner.close();
-            future.channel().closeFuture().sync();
+            channel.close().sync();
 
         } catch (Exception e) {
             e.printStackTrace();
