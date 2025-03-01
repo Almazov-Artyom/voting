@@ -8,13 +8,7 @@ import ru.almaz.server.service.VoteService;
 
 
 public class MainHandler extends SimpleChannelInboundHandler<String> {
-
-    private final LoginService loginService = new LoginService();
-
-    private final TopicService topicService = new TopicService();
-
-    private final VoteService voteService = new VoteService();
-
+    private final CommandHandler commandHandler = new CommandHandler();
 
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
@@ -24,36 +18,13 @@ public class MainHandler extends SimpleChannelInboundHandler<String> {
     @Override
     public void channelInactive(ChannelHandlerContext ctx) throws Exception {
         System.out.println("user disconnected");
-        loginService.logout(ctx.channel());
+        LoginService.logout(ctx.channel());
     }
 
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, String msg) throws Exception {
         System.out.println(msg);
-        System.out.println("pipline:"+ctx.pipeline());
-
-        if(!loginService.isLoggedIn(ctx.channel())) {
-            if(msg.startsWith("login -u=")){
-                loginService.loginCommand(ctx, msg);
-            } else
-                ctx.writeAndFlush("Вы не залогинились");
-        }
-        else{
-            if(msg.startsWith("create topic -n=")){
-                topicService.createTopicCommand(ctx, msg);
-            }
-            else if(msg.startsWith("view")){
-                if(msg.matches("^view -t=[^ ]+ -v=.+$"))
-                    voteService.view(ctx, msg);
-                else
-                    topicService.viewCommand(ctx, msg);
-            }
-            else if(msg.startsWith("create vote -t=")){
-                voteService.startCreateVote(ctx, msg);
-            }
-
-        }
-
+        commandHandler.handleCommand(ctx, msg.trim());
     }
 
     @Override
@@ -61,7 +32,6 @@ public class MainHandler extends SimpleChannelInboundHandler<String> {
         cause.printStackTrace();
         ctx.close();
     }
-
 
 
 }

@@ -7,24 +7,23 @@ import ru.almaz.server.storage.UserStorage;
 
 @RequiredArgsConstructor
 public class LoginService {
-    private final UserStorage userStorage = new UserStorage();
+    private static final UserStorage userStorage = new UserStorage();
 
-
-    public void logout(Channel channel) {
+    public static void logout(Channel channel) {
         userStorage.deleteUser(channel);
     }
 
-    public boolean isLoggedIn(Channel channel) {
+    public static boolean isLoggedIn(Channel channel) {
         return userStorage.isUserExistByChannel(channel);
     }
 
-    public void loginCommand(ChannelHandlerContext ctx, String msg) {
+    public static void loginCommand(ChannelHandlerContext ctx, String msg) {
         String username = msg.substring("login -u=".length());
 
-        if(!userStorage.isUserExistByUsername(username)) {
+        if (!userStorage.isUserExistByUsername(username)) {
             userStorage.saveUser(ctx.channel(), username);
-            ctx.writeAndFlush("Вы вошли под именем: "+username);
+            ctx.writeAndFlush("Вы вошли под именем: " + username + "\n");
         } else
-            ctx.writeAndFlush("Пользователь с таким именем уже вошел");
+            ctx.writeAndFlush("Пользователь с таким именем уже вошел\n");
     }
 }

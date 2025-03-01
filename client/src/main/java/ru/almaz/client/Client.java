@@ -8,6 +8,7 @@ import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
+import io.netty.handler.codec.LineBasedFrameDecoder;
 import io.netty.handler.codec.string.StringDecoder;
 import io.netty.handler.codec.string.StringEncoder;
 
@@ -29,14 +30,14 @@ public class Client {
                             ch.pipeline().addLast(new StringDecoder(), new StringEncoder(), new Handler());
                         }
                     });
-            ChannelFuture future = bootstrap.connect("localhost",8080).sync();
+            ChannelFuture future = bootstrap.connect("localhost", 8080).sync();
 
             Channel channel = future.channel();
 
             Scanner scanner = new Scanner(System.in);
-            while(true){
+            while (true) {
                 String msg = scanner.nextLine();
-                if(msg.equals("exit")){
+                if (msg.equals("exit")) {
                     break;
                 }
                 channel.writeAndFlush(msg);
@@ -44,11 +45,9 @@ public class Client {
             scanner.close();
             future.channel().closeFuture().sync();
 
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
-        }
-        finally {
+        } finally {
             group.shutdownGracefully();
         }
 

@@ -9,13 +9,15 @@ import java.util.List;
 @Getter
 @Setter
 public class Vote {
-    private String name="";
+    private String name = "";
 
-    private String description="";
+    private String description = "";
 
     private List<AnswerOption> answerOptions = new ArrayList<>();
 
-    private String userCreator ="";
+    private String userCreator = "";
+
+    private List<String> answerUsers = new ArrayList<>();
 
     @Getter
     @Setter

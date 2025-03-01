@@ -2,8 +2,9 @@ package ru.almaz.client;
 
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
+import io.netty.channel.SimpleChannelInboundHandler;
 
-public class Handler extends ChannelInboundHandlerAdapter {
+public class Handler extends SimpleChannelInboundHandler<String> {
 
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
@@ -11,9 +12,11 @@ public class Handler extends ChannelInboundHandlerAdapter {
     }
 
     @Override
-    public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
-        System.out.println(msg);
+    public void channelRead0(ChannelHandlerContext ctx, String msg) throws Exception {
+        System.out.print(msg);
+
     }
+
 
 //    @Override
 //    public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {

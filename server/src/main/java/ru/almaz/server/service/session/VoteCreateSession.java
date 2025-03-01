@@ -46,6 +46,7 @@ public class VoteCreateSession {
     public void addVoteInTopic() {
         topic.getVotes().add(vote);
     }
+
     public int getAnswerOptionCount() {
         return vote.getAnswerOptions().size();
     }

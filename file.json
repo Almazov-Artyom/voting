@@ -1,0 +1,29 @@
+[
+  {
+    "name": "topic",
+    "votes": [
+      {
+        "name": "Голосование",
+        "description": "Пидор?",
+        "answerOptions": [
+          {
+            "answer": "lf",
+            "countUsers": 0
+          },
+          {
+            "answer": "нет",
+            "countUsers": 1
+          },
+          {
+            "answer": "наверное",
+            "countUsers": 0
+          }
+        ],
+        "userCreator": "user",
+        "answerUsers": [
+          "user"
+        ]
+      }
+    ]
+  }
+]
