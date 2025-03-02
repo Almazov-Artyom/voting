@@ -15,6 +15,7 @@ public class AnswerHandler extends SimpleChannelInboundHandler<String> {
 
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, String msg) throws Exception {
+        logger.info("#" + ctx.channel().id() + ": Сообщение - " + msg);
         voteService.activeVote(ctx, msg);
     }
 }
