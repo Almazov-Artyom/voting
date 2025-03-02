@@ -2,21 +2,25 @@ package ru.almaz.server.handler;
 
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
+import lombok.RequiredArgsConstructor;
 import ru.almaz.server.service.LoginService;
 
+@RequiredArgsConstructor
 public class MainHandler extends SimpleChannelInboundHandler<String> {
-    private final CommandHandler commandHandler = new CommandHandler();
+    private final ClientCommandHandler commandHandler;
+
+    private final LoginService loginService;
 
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
         System.out.println("user connected" + ctx);
-        ctx.writeAndFlush("Вы подключены\n");
+        ctx.writeAndFlush("Вы подключены\nДля продолжения войдите\n");
     }
 
     @Override
     public void channelInactive(ChannelHandlerContext ctx) throws Exception {
         System.out.println("user disconnected");
-        LoginService.logout(ctx.channel());
+        loginService.logout(ctx.channel());
     }
 
     @Override

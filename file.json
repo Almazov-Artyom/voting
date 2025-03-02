@@ -1,0 +1,19 @@
+[ {
+  "name" : "topic",
+  "votes" : [ {
+    "name" : "golos",
+    "description" : "golosovanie",
+    "answerOptions" : [ {
+      "answer" : "yse",
+      "countUsers" : 0
+    }, {
+      "answer" : "no",
+      "countUsers" : 1
+    }, {
+      "answer" : "maybe",
+      "countUsers" : 0
+    } ],
+    "userCreator" : "user",
+    "answerUsers" : [ "user" ]
+  } ]
+} ]

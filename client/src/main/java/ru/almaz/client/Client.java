@@ -8,16 +8,21 @@ import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
-import io.netty.handler.codec.LineBasedFrameDecoder;
 import io.netty.handler.codec.string.StringDecoder;
 import io.netty.handler.codec.string.StringEncoder;
+import ru.almaz.client.handler.MainHandler;
 
 import java.util.Scanner;
 
 public class Client {
+    private static final String HOST = "localhost";
+    private static final int PORT = 8080;
 
+    public static void main(String[] args) {
+        new Client().start();
+    }
 
-    public static void main(String[] args) throws Exception {
+    public void start() {
         EventLoopGroup group = new NioEventLoopGroup();
 
         try {
@@ -27,22 +32,15 @@ public class Client {
                     .handler(new ChannelInitializer<SocketChannel>() {
                         @Override
                         protected void initChannel(SocketChannel ch) throws Exception {
-                            ch.pipeline().addLast(new StringDecoder(), new StringEncoder(), new Handler());
+                            ch.pipeline().addLast(new StringDecoder(), new StringEncoder(), new MainHandler());
                         }
                     });
-            ChannelFuture future = bootstrap.connect("localhost", 8080).sync();
+            ChannelFuture future = bootstrap.connect(HOST, PORT).sync();
 
             Channel channel = future.channel();
 
-            Scanner scanner = new Scanner(System.in);
-            while (true) {
-                String msg = scanner.nextLine();
-                if (msg.equals("exit")) {
-                    break;
-                }
-                channel.writeAndFlush(msg);
-            }
-            scanner.close();
+            readConsole(channel);
+
             channel.close().sync();
 
         } catch (Exception e) {
@@ -50,6 +48,18 @@ public class Client {
         } finally {
             group.shutdownGracefully();
         }
-
     }
+
+    public void readConsole(Channel channel) {
+        Scanner scanner = new Scanner(System.in);
+        while (true) {
+            String command = scanner.nextLine();
+            if (command.matches("^exit$")) {
+                break;
+            }
+            channel.writeAndFlush(command);
+        }
+        scanner.close();
+    }
+
 }

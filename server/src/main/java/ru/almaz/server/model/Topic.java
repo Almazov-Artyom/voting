@@ -18,4 +18,8 @@ public class Topic {
         this.votes = new ArrayList<>();
     }
 
+    public Topic() {
+        this.votes = new ArrayList<>();
+        this.name = "";
+    }
 }

@@ -25,7 +25,6 @@ public class Vote {
         answerOptions = new ArrayList<>();
         userCreator = "";
         answerUsers = new ArrayList<>();
-
     }
 
     @Getter
