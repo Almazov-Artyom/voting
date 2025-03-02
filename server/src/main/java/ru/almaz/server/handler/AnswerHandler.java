@@ -8,15 +8,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 @RequiredArgsConstructor
-public class VoteHandler extends SimpleChannelInboundHandler<String> {
-    private static final org.slf4j.Logger logger = LoggerFactory.getLogger(VoteHandler.class);
+public class AnswerHandler extends SimpleChannelInboundHandler<String> {
+    private static final org.slf4j.Logger logger = LoggerFactory.getLogger(AnswerHandler.class);
 
     private final VoteService voteService;
 
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, String msg) throws Exception {
-        logger.info("#" + ctx.channel().id() + ": Сообщение - " + msg);
-        voteService.activeCreateVote(ctx, msg);
+        voteService.activeVote(ctx, msg);
     }
-
 }

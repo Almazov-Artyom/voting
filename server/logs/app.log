@@ -1,0 +1,28 @@
+2025-03-03 01:40:57 [main] WARN  r.almaz.server.service.TopicService - #null: Топик с именем: TestTopic уже есть
+2025-03-03 01:40:57 [main] WARN  r.almaz.server.service.TopicService - #null: Топика с именем: TestTopic не существует
+2025-03-03 01:40:57 [main] INFO  r.almaz.server.service.TopicService - #null: Создал топик с именем: TestTopic
+2025-03-03 01:40:57 [main] WARN  r.almaz.server.service.LoginService - #null: Пользователь: TestUser уже вошел
+2025-03-03 01:40:57 [main] INFO  r.almaz.server.service.LoginService - #null: Пользователь вошел под именем: TestUser
+2025-03-03 01:40:57 [main] WARN  ru.almaz.server.service.VoteService - #null: Голосования с именем: VoteNotExists не существует
+2025-03-03 01:40:57 [main] WARN  ru.almaz.server.service.VoteService - #null: Топик с именем: TopicNotExists не существует
+2025-03-03 01:40:57 [main] WARN  ru.almaz.server.service.VoteService - #nullГолосование может удалить только пользователь, создавший его
+2025-03-03 01:40:57 [main] WARN  ru.almaz.server.service.VoteService - #null: Голосования с именем: VoteNotExists не существует
+2025-03-03 01:40:57 [main] WARN  ru.almaz.server.service.VoteService - #null: Топик с именем: nonExistentTopic не существует
+2025-03-03 01:40:57 [main] WARN  ru.almaz.server.service.VoteService - #null: уже отвечал на голосование: 
+2025-03-03 01:40:57 [main] WARN  ru.almaz.server.service.VoteService - #null: Топик с именем: TopicNoExists не существует
+2025-03-03 01:40:57 [main] WARN  ru.almaz.server.service.VoteService - #null: Голосования с именем: VoteNotExists не существует
+2025-03-03 01:40:57 [main] WARN  ru.almaz.server.service.VoteService - #null: Топик с именем: TopicNoExists не существует
+2025-03-03 01:43:11 [main] WARN  r.almaz.server.service.TopicService - #null: Топик с именем: TestTopic уже есть
+2025-03-03 01:43:11 [main] WARN  r.almaz.server.service.TopicService - #null: Топика с именем: TestTopic не существует
+2025-03-03 01:43:11 [main] INFO  r.almaz.server.service.TopicService - #null: Создал топик с именем: TestTopic
+2025-03-03 01:43:11 [main] WARN  r.almaz.server.service.LoginService - #null: Пользователь: TestUser уже вошел
+2025-03-03 01:43:11 [main] INFO  r.almaz.server.service.LoginService - #null: Пользователь вошел под именем: TestUser
+2025-03-03 01:43:11 [main] WARN  ru.almaz.server.service.VoteService - #null: Голосования с именем: VoteNotExists не существует
+2025-03-03 01:43:11 [main] WARN  ru.almaz.server.service.VoteService - #null: Топик с именем: TopicNotExists не существует
+2025-03-03 01:43:11 [main] WARN  ru.almaz.server.service.VoteService - #nullГолосование может удалить только пользователь, создавший его
+2025-03-03 01:43:11 [main] WARN  ru.almaz.server.service.VoteService - #null: Голосования с именем: VoteNotExists не существует
+2025-03-03 01:43:11 [main] WARN  ru.almaz.server.service.VoteService - #null: Топик с именем: nonExistentTopic не существует
+2025-03-03 01:43:11 [main] WARN  ru.almaz.server.service.VoteService - #null: уже отвечал на голосование: 
+2025-03-03 01:43:11 [main] WARN  ru.almaz.server.service.VoteService - #null: Топик с именем: TopicNoExists не существует
+2025-03-03 01:43:11 [main] WARN  ru.almaz.server.service.VoteService - #null: Голосования с именем: VoteNotExists не существует
+2025-03-03 01:43:11 [main] WARN  ru.almaz.server.service.VoteService - #null: Топик с именем: TopicNoExists не существует

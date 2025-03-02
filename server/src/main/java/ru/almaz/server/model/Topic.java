@@ -11,11 +11,15 @@ import java.util.List;
 public class Topic {
     private String name;
 
-    private List<Vote> votes;
+    private final List<Vote> votes;
 
     public Topic(String name) {
         this.name = name;
         this.votes = new ArrayList<>();
     }
 
+    public Topic() {
+        this.votes = new ArrayList<>();
+        this.name = "";
+    }
 }
