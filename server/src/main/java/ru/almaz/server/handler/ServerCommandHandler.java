@@ -1,6 +1,5 @@
 package ru.almaz.server.handler;
 
-import lombok.RequiredArgsConstructor;
 import ru.almaz.server.service.FileService;
 import ru.almaz.server.storage.TopicStorage;
 

@@ -1,7 +1,6 @@
 package ru.almaz.server.handler;
 
 import io.netty.channel.ChannelHandlerContext;
-import lombok.RequiredArgsConstructor;
 import ru.almaz.server.manager.VoteManager;
 import ru.almaz.server.service.LoginService;
 import ru.almaz.server.service.TopicService;
@@ -13,8 +12,12 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.BiConsumer;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class ClientCommandHandler {
+    private static final org.slf4j.Logger logger = LoggerFactory.getLogger(ClientCommandHandler.class);
+
     private final Map<String, BiConsumer<ChannelHandlerContext, String>> commands;
 
     private final LoginService loginService;
@@ -36,10 +39,8 @@ public class ClientCommandHandler {
     }
 
     public void handleCommand(ChannelHandlerContext ctx, String msg) {
-        System.out.println("handleCommand" + msg);
         if (!loginService.isLoggedIn(ctx.channel())) {
             if (msg.matches("^login -u=.+$")) {
-                System.out.println("handleCommand: login");
                 loginService.login(ctx, msg);
             } else {
                 ctx.writeAndFlush("Вы не авторизованы!\n");
@@ -50,11 +51,11 @@ public class ClientCommandHandler {
         for (var entry : commands.entrySet()) {
             if (msg.matches(entry.getKey())) {
                 entry.getValue().accept(ctx, msg);
-                System.out.println(entry.getKey());
                 return;
             }
         }
         ctx.writeAndFlush("Неверная команда\n");
+        logger.warn("#" + ctx.channel().id() + ": Неверная команда - " + msg);
     }
 
 }

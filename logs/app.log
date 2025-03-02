@@ -1,0 +1,89 @@
+2025-03-03 00:17:59 [main] INFO  ru.almaz.server.Server - df
+2025-03-03 00:19:28 [main] INFO  ru.almaz.server.Server - df
+2025-03-03 00:19:46 [main] INFO  ru.almaz.server.Server - df
+2025-03-03 00:20:48 [main] INFO  ru.almaz.server.Server - df
+2025-03-03 00:20:55 [main] INFO  ru.almaz.server.Server - df
+2025-03-03 00:21:49 [main] INFO  ru.almaz.server.Server - df
+2025-03-03 00:22:55 [main] INFO  ru.almaz.server.Server - df
+2025-03-03 00:23:49 [main] INFO  ru.almaz.server.Server - df
+2025-03-03 00:24:40 [main] INFO  ru.almaz.server.Server - Сервер запущен на порту 8080
+
+2025-03-03 00:27:17 [main] INFO  ru.almaz.server.Server - Сервер запущен на порту 8080
+
+2025-03-03 00:27:26 [nioEventLoopGroup-3-1] INFO  ru.almaz.server.Server - [id: 0x0e6938e3, L:/127.0.0.1:8080 - R:/127.0.0.1:55542]
+2025-03-03 00:28:46 [main] INFO  ru.almaz.server.Server - Сервер запущен на порту 8080
+
+2025-03-03 00:28:49 [nioEventLoopGroup-3-1] INFO  ru.almaz.server.Server - [id: 0xe625d4c7, L:/127.0.0.1:8080 - R:/127.0.0.1:59546]
+2025-03-03 00:29:36 [main] INFO  ru.almaz.server.Server - Сервер запущен на порту 8080
+
+2025-03-03 00:29:39 [nioEventLoopGroup-3-1] INFO  ru.almaz.server.Server - [id: 0xdb7e24b7, L:/127.0.0.1:8080 - R:/127.0.0.1:42984]
+2025-03-03 00:31:03 [main] INFO  ru.almaz.server.Server - Сервер запущен на порту 8080
+
+2025-03-03 00:31:41 [main] INFO  ru.almaz.server.Server - Сервер запущен на порту 8080
+
+2025-03-03 00:31:47 [nioEventLoopGroup-3-1] INFO  ru.almaz.server.Server - 0f8b6509: Пользователь подключился
+2025-03-03 00:32:37 [main] INFO  ru.almaz.server.Server - Сервер запущен на порту 8080
+
+2025-03-03 00:32:41 [nioEventLoopGroup-3-1] INFO  ru.almaz.server.Server - #a7ddec37: Пользователь подключился
+2025-03-03 00:39:41 [main] INFO  ru.almaz.server.Server - Сервер запущен на порту 8080
+
+2025-03-03 00:39:46 [nioEventLoopGroup-3-1] INFO  ru.almaz.server.Server - #edb58812: Пользователь подключился
+2025-03-03 00:39:56 [nioEventLoopGroup-3-1] INFO  ru.almaz.server.Server - #edb58812: log
+2025-03-03 00:41:47 [main] INFO  ru.almaz.server.Server - Сервер запущен на порту 8080
+
+2025-03-03 00:41:50 [nioEventLoopGroup-3-1] INFO  ru.almaz.server.handler.MainHandler - #2c841901: Пользователь подключился
+2025-03-03 00:42:12 [main] INFO  ru.almaz.server.Server - Сервер запущен на порту 8080
+2025-03-03 00:42:16 [nioEventLoopGroup-3-1] INFO  ru.almaz.server.handler.MainHandler - #b19039a4: Пользователь подключился
+2025-03-03 00:42:24 [nioEventLoopGroup-3-1] INFO  ru.almaz.server.handler.MainHandler - #b19039a4: login -u
+2025-03-03 00:43:45 [main] INFO  ru.almaz.server.Server - Сервер запущен на порту 8080
+2025-03-03 00:43:50 [nioEventLoopGroup-3-1] INFO  ru.almaz.server.handler.MainHandler - #e707d0d0: Пользователь подключился
+2025-03-03 00:43:59 [nioEventLoopGroup-3-1] INFO  ru.almaz.server.handler.MainHandler - #e707d0d0: login -u=user
+2025-03-03 00:44:25 [main] INFO  ru.almaz.server.Server - Сервер запущен на порту 8080
+2025-03-03 00:44:29 [nioEventLoopGroup-3-1] INFO  ru.almaz.server.handler.MainHandler - #f4202c73: Пользователь подключился
+2025-03-03 00:44:30 [nioEventLoopGroup-3-1] INFO  ru.almaz.server.handler.MainHandler - #f4202c73: fdg
+2025-03-03 00:44:37 [nioEventLoopGroup-3-1] INFO  ru.almaz.server.handler.MainHandler - #f4202c73: login -u=
+2025-03-03 00:44:45 [nioEventLoopGroup-3-1] INFO  ru.almaz.server.handler.MainHandler - #f4202c73: login -u=user
+2025-03-03 00:44:52 [nioEventLoopGroup-3-1] INFO  ru.almaz.server.handler.MainHandler - #f4202c73: dfd
+2025-03-03 00:44:52 [nioEventLoopGroup-3-1] WARN  r.a.s.handler.ClientCommandHandler - #f4202c73: Неверная команда
+2025-03-03 00:47:26 [nioEventLoopGroup-3-1] INFO  ru.almaz.server.handler.MainHandler - #f4202c73: Пользователь отключился
+2025-03-03 00:47:53 [main] INFO  ru.almaz.server.Server - Сервер запущен на порту 8080
+2025-03-03 00:47:57 [nioEventLoopGroup-3-1] INFO  ru.almaz.server.handler.MainHandler - #a38a859a: Пользователь подключился
+2025-03-03 00:48:00 [nioEventLoopGroup-3-1] INFO  ru.almaz.server.handler.MainHandler - #a38a859a: Сообщение - ить
+2025-03-03 00:48:03 [nioEventLoopGroup-3-1] INFO  ru.almaz.server.handler.MainHandler - #a38a859a: Сообщение - лод
+2025-03-03 00:48:11 [nioEventLoopGroup-3-1] INFO  ru.almaz.server.handler.MainHandler - #a38a859a: Сообщение - login -u=user
+2025-03-03 01:10:55 [main] INFO  ru.almaz.server.Server - Сервер запущен на порту 8080
+2025-03-03 01:10:59 [nioEventLoopGroup-3-1] INFO  ru.almaz.server.handler.MainHandler - #733db2e1: Пользователь подключился
+2025-03-03 01:11:03 [nioEventLoopGroup-3-1] INFO  ru.almaz.server.handler.MainHandler - #733db2e1: Сообщение - митт
+2025-03-03 01:11:06 [nioEventLoopGroup-3-1] INFO  ru.almaz.server.handler.MainHandler - #733db2e1: Сообщение - лдожлд
+2025-03-03 01:11:16 [nioEventLoopGroup-3-1] INFO  ru.almaz.server.handler.MainHandler - #733db2e1: Сообщение - login -u=user
+2025-03-03 01:11:16 [nioEventLoopGroup-3-1] INFO  r.almaz.server.service.LoginService - #733db2e1: Пользователь вошел под именем: user
+2025-03-03 01:11:22 [nioEventLoopGroup-3-1] INFO  ru.almaz.server.handler.MainHandler - #733db2e1: Сообщение - create 
+2025-03-03 01:11:22 [nioEventLoopGroup-3-1] WARN  r.a.s.handler.ClientCommandHandler - #733db2e1: Неверная команда - create
+2025-03-03 01:11:53 [nioEventLoopGroup-3-1] INFO  ru.almaz.server.handler.MainHandler - #733db2e1: Сообщение -  create topic -n=topic
+2025-03-03 01:11:53 [nioEventLoopGroup-3-1] INFO  r.almaz.server.service.TopicService - #733db2e1: Создал топик с именем: topic
+2025-03-03 01:12:15 [main] INFO  ru.almaz.server.Server - Сервер запущен на порту 8080
+2025-03-03 01:12:17 [nioEventLoopGroup-3-1] INFO  ru.almaz.server.handler.MainHandler - #c6d9d94f: Пользователь подключился
+2025-03-03 01:12:19 [nioEventLoopGroup-3-1] INFO  ru.almaz.server.handler.MainHandler - #c6d9d94f: Сообщение - gfjh
+2025-03-03 01:12:24 [nioEventLoopGroup-3-1] INFO  ru.almaz.server.handler.MainHandler - #c6d9d94f: Сообщение - login -u=user
+2025-03-03 01:12:24 [nioEventLoopGroup-3-1] INFO  r.almaz.server.service.LoginService - #c6d9d94f: Пользователь вошел под именем: user
+2025-03-03 01:12:56 [nioEventLoopGroup-3-2] INFO  ru.almaz.server.handler.MainHandler - #fc83cd1a: Пользователь подключился
+2025-03-03 01:13:08 [nioEventLoopGroup-3-2] INFO  ru.almaz.server.handler.MainHandler - #fc83cd1a: Сообщение - login -u=user
+2025-03-03 01:13:08 [nioEventLoopGroup-3-2] WARN  r.almaz.server.service.LoginService - #fc83cd1a: Пользователь: userуже вошел
+2025-03-03 01:13:30 [nioEventLoopGroup-3-2] INFO  ru.almaz.server.handler.MainHandler - #fc83cd1a: Сообщение - create
+2025-03-03 01:13:50 [nioEventLoopGroup-3-2] INFO  ru.almaz.server.handler.MainHandler - #fc83cd1a: Сообщение - login -u=user1
+2025-03-03 01:13:50 [nioEventLoopGroup-3-2] INFO  r.almaz.server.service.LoginService - #fc83cd1a: Пользователь вошел под именем: user1
+2025-03-03 01:14:00 [nioEventLoopGroup-3-2] INFO  ru.almaz.server.handler.MainHandler - #fc83cd1a: Сообщение - create topic -n=topic
+2025-03-03 01:14:00 [nioEventLoopGroup-3-2] INFO  r.almaz.server.service.TopicService - #fc83cd1a: Создал топик с именем: topic
+2025-03-03 01:14:11 [nioEventLoopGroup-3-1] INFO  ru.almaz.server.handler.MainHandler - #c6d9d94f: Сообщение - create topic -n=topic
+2025-03-03 01:14:11 [nioEventLoopGroup-3-1] WARN  r.almaz.server.service.TopicService - #c6d9d94f: Топик с именем: topicуже есть
+2025-03-03 01:15:24 [nioEventLoopGroup-3-1] INFO  ru.almaz.server.handler.MainHandler - #c6d9d94f: Сообщение - view -t=topi
+2025-03-03 01:15:24 [nioEventLoopGroup-3-1] WARN  r.almaz.server.service.TopicService - #c6d9d94f: Топика с именем: topiне существует
+2025-03-03 01:15:54 [nioEventLoopGroup-3-1] INFO  ru.almaz.server.handler.MainHandler - #c6d9d94f: Сообщение - create vote -t=f
+2025-03-03 01:15:54 [nioEventLoopGroup-3-1] WARN  ru.almaz.server.service.VoteService - #c6d9d94f: Топик с именем: fне существует
+2025-03-03 01:18:58 [nioEventLoopGroup-3-1] INFO  ru.almaz.server.handler.MainHandler - #c6d9d94f: Сообщение - create vote -t=topic
+2025-03-03 01:19:10 [nioEventLoopGroup-3-1] WARN  ru.almaz.server.service.VoteService - #c6d9d94f: Некорректное значение для количества ответов
+2025-03-03 01:22:13 [nioEventLoopGroup-3-2] INFO  ru.almaz.server.handler.MainHandler - #fc83cd1a: Сообщение - create vote -t=topic
+2025-03-03 01:22:19 [nioEventLoopGroup-3-2] INFO  ru.almaz.server.service.VoteService - #fc83cd1a: Cоздал голосование с именем: fdg
+2025-03-03 01:22:41 [nioEventLoopGroup-3-2] INFO  ru.almaz.server.handler.MainHandler - #fc83cd1a: Сообщение - vote -t=topic -v=fdg
+2025-03-03 01:24:27 [nioEventLoopGroup-3-2] WARN  ru.almaz.server.service.VoteService - #fc83cd1a: Недопустимое значение для ответа
+2025-03-03 01:24:29 [nioEventLoopGroup-3-2] INFO  ru.almaz.server.service.VoteService - #fc83cd1a: Выбрал 1Вариант ответа для голосования: fdg

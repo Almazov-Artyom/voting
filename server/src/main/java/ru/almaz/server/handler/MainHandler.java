@@ -4,34 +4,37 @@ import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import lombok.RequiredArgsConstructor;
 import ru.almaz.server.service.LoginService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @RequiredArgsConstructor
 public class MainHandler extends SimpleChannelInboundHandler<String> {
+    private static final org.slf4j.Logger logger = LoggerFactory.getLogger(MainHandler.class);
     private final ClientCommandHandler commandHandler;
 
     private final LoginService loginService;
 
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
-        System.out.println("user connected" + ctx);
+        logger.info("#" + ctx.channel().id() + ": Пользователь подключился");
         ctx.writeAndFlush("Вы подключены\nДля продолжения войдите\n");
     }
 
     @Override
     public void channelInactive(ChannelHandlerContext ctx) throws Exception {
-        System.out.println("user disconnected");
+        logger.info("#" + ctx.channel().id() + ": Пользователь отключился");
         loginService.logout(ctx.channel());
     }
 
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, String msg) throws Exception {
-        System.out.println(msg);
+        logger.info("#" + ctx.channel().id() + ": Сообщение - " + msg);
         commandHandler.handleCommand(ctx, msg.trim());
     }
 
     @Override
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
-        cause.printStackTrace();
+        logger.error(cause.toString());
         ctx.close();
     }
 

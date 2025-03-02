@@ -18,4 +18,8 @@ public class AnswerSession {
     public int getCountAnswers() {
         return vote.getAnswerOptions().size();
     }
+
+    public String getVoteName() {
+        return vote.getName();
+    }
 }

@@ -8,16 +8,16 @@ import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.handler.codec.string.StringDecoder;
 import io.netty.handler.codec.string.StringEncoder;
 import ru.almaz.server.creator.MainHandlerCreator;
-import ru.almaz.server.handler.ClientCommandHandler;
 import ru.almaz.server.handler.ServerCommandHandler;
-import ru.almaz.server.handler.MainHandler;
-import ru.almaz.server.service.LoginService;
-import ru.almaz.server.storage.UserStorage;
 
 import java.util.Scanner;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 
 public class Server {
+    private static final org.slf4j.Logger logger = LoggerFactory.getLogger(Server.class);
 
     private static final int PORT = 8080;
 
@@ -41,14 +41,15 @@ public class Server {
                     });
 
             ChannelFuture future = bootstrap.bind(PORT).sync();
-            System.out.printf("Сервер запущен на порту %d\n", PORT);
+
+            logger.info(String.format("Сервер запущен на порту %d", PORT));
 
             readConsole();
 
             future.channel().close().sync();
 
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error(e.toString());
         } finally {
             bossGroup.shutdownGracefully();
             workerGroup.shutdownGracefully();

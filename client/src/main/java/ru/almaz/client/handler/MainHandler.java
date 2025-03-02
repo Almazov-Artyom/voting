@@ -10,9 +10,4 @@ public class MainHandler extends SimpleChannelInboundHandler<String> {
         System.out.print(msg);
 
     }
-
-//    @Override
-//    public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
-//        super.exceptionCaught(ctx, cause);
-//    }
 }
