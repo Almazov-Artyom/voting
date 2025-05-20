@@ -5,6 +5,7 @@ import io.netty.channel.SimpleChannelInboundHandler;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
+import ru.almaz.server.service.ClientCommandService;
 import ru.almaz.server.service.LoginService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,7 +15,8 @@ import org.slf4j.LoggerFactory;
 @RequiredArgsConstructor
 public class MainHandler extends SimpleChannelInboundHandler<String> {
     private static final org.slf4j.Logger logger = LoggerFactory.getLogger(MainHandler.class);
-    private final ClientCommandHandler commandHandler;
+
+    private final ClientCommandService clientCommandService;
 
     private final LoginService loginService;
 
@@ -33,7 +35,7 @@ public class MainHandler extends SimpleChannelInboundHandler<String> {
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, String msg) throws Exception {
         logger.info("#" + ctx.channel().id() + ": Сообщение - " + msg);
-        commandHandler.handleCommand(ctx, msg.trim());
+        clientCommandService.processingCommand(ctx, msg.trim());
     }
 
     @Override
