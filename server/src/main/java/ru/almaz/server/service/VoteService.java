@@ -4,8 +4,13 @@ import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandlerContext;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.tuple.Pair;
-import ru.almaz.server.creator.MainHandlerCreator;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.stereotype.Service;
+import ru.almaz.server.factory.HandlerFactory;
 import ru.almaz.server.handler.AnswerHandler;
+import ru.almaz.server.handler.MainHandler;
 import ru.almaz.server.handler.VoteHandler;
 import ru.almaz.server.manager.VoteManager;
 import ru.almaz.server.model.Topic;
@@ -21,6 +26,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+@Service
 @RequiredArgsConstructor
 public class VoteService {
     private static final org.slf4j.Logger logger = LoggerFactory.getLogger(VoteService.class);
@@ -34,6 +40,8 @@ public class VoteService {
     private final TopicStorage topicStorage;
 
     private final VoteManager voteManager;
+
+    private final HandlerFactory handlerFactory;
 
     private Optional<Pair<Topic, Vote>> getTopicAndVote(ChannelHandlerContext ctx, String msg) {
         String[] parts = msg.split(" -t=| -v=");
@@ -69,7 +77,7 @@ public class VoteService {
             activeCreateSessions.put(ctx.channel(), new VoteCreateSession(topic));
             ctx.writeAndFlush("Введите название голосования\n");
             ctx.pipeline().removeLast();
-            ctx.pipeline().addLast(new VoteHandler(this));
+            ctx.pipeline().addLast(handlerFactory.getVoteHandler());
         }
     }
 
@@ -124,7 +132,7 @@ public class VoteService {
                     session.addAnswerOptionToVote(msg);
                     if (!session.canAddOption()) {
                         ctx.pipeline().removeLast();
-                        ctx.pipeline().addLast(MainHandlerCreator.create());
+                        ctx.pipeline().addLast(handlerFactory.getMainHandler());
                         session.addVoteInTopic();
                         ctx.writeAndFlush(
                                 String.format("Вы создали голосование: %s\n", session.getVote().getName())
@@ -173,7 +181,7 @@ public class VoteService {
             ctx.writeAndFlush("Выберите ответ\n");
             activeAnswerSessions.put(ctx.channel(), new AnswerSession(vote));
             ctx.pipeline().removeLast();
-            ctx.pipeline().addLast(new AnswerHandler(this));
+            ctx.pipeline().addLast(handlerFactory.getAnswerHandler());
         });
     }
 
@@ -192,7 +200,7 @@ public class VoteService {
         if (numberAnswer > 0 && numberAnswer <= answerSession.getCountAnswers()) {
             answerSession.toAnswer(numberAnswer, userStorage.findUserByChannel(ctx.channel()));
             ctx.pipeline().removeLast();
-            ctx.pipeline().addLast(MainHandlerCreator.create());
+            ctx.pipeline().addLast(handlerFactory.getMainHandler());
             ctx.writeAndFlush(String.format("Вы выбрали %d вариант\n", numberAnswer));
             logger.info("#" + ctx.channel().id() + ": Выбрал " + numberAnswer +
                     "Вариант ответа для голосования: " + answerSession.getVoteName());

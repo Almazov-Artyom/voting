@@ -2,6 +2,7 @@ package ru.almaz.server.service;
 
 import io.netty.channel.ChannelHandlerContext;
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 import ru.almaz.server.model.Topic;
 import ru.almaz.server.storage.TopicStorage;
 
@@ -10,6 +11,7 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+@Service
 @RequiredArgsConstructor
 public class TopicService {
     private static final org.slf4j.Logger logger = LoggerFactory.getLogger(TopicService.class);

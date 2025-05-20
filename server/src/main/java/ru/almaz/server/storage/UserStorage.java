@@ -1,10 +1,12 @@
 package ru.almaz.server.storage;
 
 import io.netty.channel.Channel;
+import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
 import java.util.Map;
 
+@Component
 public class UserStorage {
     private static final Map<Channel, String> users = new HashMap<>();
 

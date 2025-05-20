@@ -1,6 +1,8 @@
 package ru.almaz.server.handler;
 
 import io.netty.channel.ChannelHandlerContext;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Component;
 import ru.almaz.server.manager.VoteManager;
 import ru.almaz.server.service.LoginService;
 import ru.almaz.server.service.TopicService;
@@ -15,19 +17,22 @@ import java.util.function.BiConsumer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+@Component
 public class ClientCommandHandler {
     private static final org.slf4j.Logger logger = LoggerFactory.getLogger(ClientCommandHandler.class);
 
-    private final Map<String, BiConsumer<ChannelHandlerContext, String>> commands;
+    private final Map<String, BiConsumer<ChannelHandlerContext, String>> commands = new HashMap<>();
 
     private final LoginService loginService;
 
-    public ClientCommandHandler(LoginService loginService) {
-        this.loginService = loginService;
-        TopicService topicService = new TopicService(new TopicStorage());
-        VoteService voteService = new VoteService(new UserStorage(), new TopicStorage(), new VoteManager());
+    private final TopicService topicService;
 
-        commands = new HashMap<>();
+    private final VoteService voteService;
+
+    public ClientCommandHandler(LoginService loginService, TopicService topicService, VoteService voteService) {
+        this.loginService = loginService;
+        this.topicService = topicService;
+        this.voteService = voteService;
 
         commands.put("^create topic -n=.+$", topicService::createTopic);
         commands.put("^view$", topicService::view);

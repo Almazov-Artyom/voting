@@ -1,12 +1,13 @@
 package ru.almaz.server.storage;
 
+import org.springframework.stereotype.Component;
 import ru.almaz.server.model.Topic;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-
+@Component
 public class TopicStorage {
     private static List<Topic> topics = new ArrayList<>();
 

@@ -7,22 +7,32 @@ import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.handler.codec.string.StringDecoder;
 import io.netty.handler.codec.string.StringEncoder;
-import ru.almaz.server.creator.MainHandlerCreator;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import ru.almaz.server.config.ServerConfig;
+
+import ru.almaz.server.factory.HandlerFactory;
 import ru.almaz.server.handler.ServerCommandHandler;
 
 import java.util.Scanner;
 
-import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-
+@RequiredArgsConstructor
 public class Server {
     private static final org.slf4j.Logger logger = LoggerFactory.getLogger(Server.class);
 
-    private static final int PORT = 8080;
+    @Value("${server.port}")
+    private int PORT;
+
+    private final HandlerFactory handlerFactory;
 
     public static void main(String[] args) {
-        new Server().start();
+        ApplicationContext context = new AnnotationConfigApplicationContext(ServerConfig.class);
+        Server server = context.getBean(Server.class);
+        server.start();
     }
 
     public void start() {
@@ -36,7 +46,7 @@ public class Server {
                     .childHandler(new ChannelInitializer<SocketChannel>() {
                         @Override
                         protected void initChannel(SocketChannel ch) {
-                            ch.pipeline().addLast(new StringDecoder(), new StringEncoder(), MainHandlerCreator.create());
+                            ch.pipeline().addLast(new StringDecoder(), new StringEncoder(), handlerFactory.getMainHandler());
                         }
                     });
 

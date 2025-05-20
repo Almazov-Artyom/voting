@@ -1,0 +1,98 @@
+2025-05-20 14:44:20 [main] INFO  ru.almaz.server.Server - Сервер запущен на порту 8080
+2025-05-20 14:44:32 [nioEventLoopGroup-3-1] INFO  ru.almaz.server.handler.MainHandler - #2caaf4eb: Пользователь подключился
+2025-05-20 14:44:43 [nioEventLoopGroup-3-1] INFO  ru.almaz.server.handler.MainHandler - #2caaf4eb: Сообщение - login -u=user
+2025-05-20 14:44:43 [nioEventLoopGroup-3-1] INFO  r.almaz.server.service.LoginService - #2caaf4eb: Пользователь вошел под именем: user
+2025-05-20 14:44:55 [nioEventLoopGroup-3-1] INFO  ru.almaz.server.handler.MainHandler - #2caaf4eb: Пользователь отключился
+2025-05-20 14:56:43 [main] INFO  ru.almaz.server.Server - Сервер запущен на порту 8080
+2025-05-20 14:56:55 [main] INFO  ru.almaz.server.Server - Сервер запущен на порту 8080
+2025-05-20 14:57:14 [main] ERROR ru.almaz.server.Server - java.net.BindException: Адрес уже используется
+2025-05-20 14:57:26 [main] INFO  ru.almaz.server.Server - Сервер запущен на порту 8090
+2025-05-20 14:57:37 [main] WARN  o.s.c.a.AnnotationConfigApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'server': Unsatisfied dependency expressed through field 'PORT': Failed to convert value of type 'java.lang.String' to required type 'int'; For input string: "${server.port}"
+2025-05-20 14:57:43 [main] INFO  ru.almaz.server.Server - Сервер запущен на порту 8090
+2025-05-20 15:12:13 [main] INFO  ru.almaz.server.Server - Сервер запущен на порту 8090
+2025-05-20 15:12:32 [main] INFO  ru.almaz.server.Server - Сервер запущен на порту 8090
+2025-05-20 15:12:55 [main] INFO  ru.almaz.server.Server - Сервер запущен на порту 8090
+2025-05-20 15:13:49 [main] INFO  ru.almaz.server.Server - Сервер запущен на порту 8090
+2025-05-20 15:14:11 [main] INFO  ru.almaz.server.Server - Сервер запущен на порту 8080
+2025-05-20 15:14:14 [nioEventLoopGroup-3-1] INFO  ru.almaz.server.handler.MainHandler - #5a8309b6: Пользователь подключился
+2025-05-20 15:14:38 [main] INFO  ru.almaz.server.Server - Сервер запущен на порту 8080
+2025-05-20 15:14:40 [nioEventLoopGroup-3-1] INFO  ru.almaz.server.handler.MainHandler - #3a6c7cf2: Пользователь подключился
+2025-05-20 15:18:20 [main] INFO  ru.almaz.server.Server - Сервер запущен на порту 8080
+2025-05-20 15:21:06 [main] INFO  ru.almaz.server.Server - Сервер запущен на порту 8080
+2025-05-20 15:28:09 [main] INFO  ru.almaz.server.Server - Сервер запущен на порту 8080
+2025-05-20 15:28:55 [nioEventLoopGroup-3-1] INFO  ru.almaz.server.handler.MainHandler - #52025ef3: Пользователь подключился
+2025-05-20 15:28:59 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Creating shared instance of singleton bean 'org.springframework.context.annotation.internalConfigurationAnnotationProcessor'
+2025-05-20 15:28:59 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Creating shared instance of singleton bean 'org.springframework.context.event.internalEventListenerProcessor'
+2025-05-20 15:28:59 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Creating shared instance of singleton bean 'org.springframework.context.event.internalEventListenerFactory'
+2025-05-20 15:28:59 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Creating shared instance of singleton bean 'org.springframework.context.annotation.internalAutowiredAnnotationProcessor'
+2025-05-20 15:28:59 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Creating shared instance of singleton bean 'serverConfig'
+2025-05-20 15:28:59 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Creating shared instance of singleton bean 'clientCommandHandler'
+2025-05-20 15:28:59 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Creating shared instance of singleton bean 'loginService'
+2025-05-20 15:28:59 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Creating shared instance of singleton bean 'userStorage'
+2025-05-20 15:28:59 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Autowiring by type from bean name 'loginService' via constructor to bean named 'userStorage'
+2025-05-20 15:28:59 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Autowiring by type from bean name 'clientCommandHandler' via constructor to bean named 'loginService'
+2025-05-20 15:28:59 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Creating shared instance of singleton bean 'mainHandler'
+2025-05-20 15:28:59 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Autowiring by type from bean name 'mainHandler' via constructor to bean named 'clientCommandHandler'
+2025-05-20 15:28:59 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Autowiring by type from bean name 'mainHandler' via constructor to bean named 'loginService'
+2025-05-20 15:28:59 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Creating shared instance of singleton bean 'voteHandler'
+2025-05-20 15:28:59 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Creating shared instance of singleton bean 'voteService'
+2025-05-20 15:28:59 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Creating shared instance of singleton bean 'topicStorage'
+2025-05-20 15:28:59 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Creating shared instance of singleton bean 'voteManager'
+2025-05-20 15:28:59 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Autowiring by type from bean name 'voteService' via constructor to bean named 'userStorage'
+2025-05-20 15:28:59 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Autowiring by type from bean name 'voteService' via constructor to bean named 'topicStorage'
+2025-05-20 15:28:59 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Autowiring by type from bean name 'voteService' via constructor to bean named 'voteManager'
+2025-05-20 15:28:59 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Autowiring by type from bean name 'voteHandler' via constructor to bean named 'voteService'
+2025-05-20 15:28:59 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Creating shared instance of singleton bean 'topicService'
+2025-05-20 15:28:59 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Autowiring by type from bean name 'topicService' via constructor to bean named 'topicStorage'
+2025-05-20 15:28:59 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Creating shared instance of singleton bean 'server'
+2025-05-20 15:28:59 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Autowiring by type from bean name 'server' via factory method to bean named 'mainHandler'
+2025-05-20 15:28:59 [main] INFO  ru.almaz.server.Server - Сервер запущен на порту 8080
+2025-05-20 15:41:23 [main] WARN  o.s.c.a.AnnotationConfigApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'clientCommandHandler' defined in file [/home/almaz/Рабочий стол/voting/server/target/classes/ru/almaz/server/handler/ClientCommandHandler.class]: Unsatisfied dependency expressed through constructor parameter 2: Error creating bean with name 'voteService' defined in file [/home/almaz/Рабочий стол/voting/server/target/classes/ru/almaz/server/service/VoteService.class]: Unsatisfied dependency expressed through constructor parameter 3: Error creating bean with name 'mainHandler' defined in file [/home/almaz/Рабочий стол/voting/server/target/classes/ru/almaz/server/handler/MainHandler.class]: Unsatisfied dependency expressed through constructor parameter 0: Error creating bean with name 'clientCommandHandler': Requested bean is currently in creation: Is there an unresolvable circular reference or an asynchronous initialization dependency?
+2025-05-20 17:17:29 [main] WARN  o.s.c.a.AnnotationConfigApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'clientCommandHandler' defined in file [/home/almaz/Рабочий стол/voting/server/target/classes/ru/almaz/server/handler/ClientCommandHandler.class]: Unsatisfied dependency expressed through constructor parameter 2: Error creating bean with name 'voteService' defined in file [/home/almaz/Рабочий стол/voting/server/target/classes/ru/almaz/server/service/VoteService.class]: Unsatisfied dependency expressed through constructor parameter 3: Error creating bean with name 'mainHandler' defined in file [/home/almaz/Рабочий стол/voting/server/target/classes/ru/almaz/server/handler/MainHandler.class]: Unsatisfied dependency expressed through constructor parameter 0: Error creating bean with name 'clientCommandHandler': Requested bean is currently in creation: Is there an unresolvable circular reference or an asynchronous initialization dependency?
+2025-05-20 17:19:02 [main] INFO  ru.almaz.server.Server - Сервер запущен на порту 8080
+2025-05-20 17:45:11 [main] INFO  ru.almaz.server.Server - Сервер запущен на порту 8080
+2025-05-20 18:49:06 [main] INFO  ru.almaz.server.Server - Сервер запущен на порту 8080
+2025-05-20 18:49:10 [nioEventLoopGroup-3-1] INFO  ru.almaz.server.handler.MainHandler - #3f772658: Пользователь подключился
+2025-05-20 18:49:20 [nioEventLoopGroup-3-1] INFO  ru.almaz.server.handler.MainHandler - #3f772658: Сообщение - login -u=user
+2025-05-20 18:49:20 [nioEventLoopGroup-3-1] INFO  r.almaz.server.service.LoginService - #3f772658: Пользователь вошел под именем: user
+2025-05-20 18:49:28 [nioEventLoopGroup-3-1] INFO  ru.almaz.server.handler.MainHandler - #3f772658: Сообщение - create topic -n=topic
+2025-05-20 18:49:28 [nioEventLoopGroup-3-1] WARN  r.a.s.handler.ClientCommandHandler - #3f772658: Неверная команда - create topic -n=topic
+2025-05-20 18:50:13 [main] INFO  ru.almaz.server.Server - Сервер запущен на порту 8080
+2025-05-20 18:50:17 [nioEventLoopGroup-3-1] INFO  ru.almaz.server.handler.MainHandler - #b7ee3226: Пользователь подключился
+2025-05-20 18:50:22 [nioEventLoopGroup-3-1] INFO  ru.almaz.server.handler.MainHandler - #b7ee3226: Сообщение - login -u=user
+2025-05-20 18:50:22 [nioEventLoopGroup-3-1] INFO  r.almaz.server.service.LoginService - #b7ee3226: Пользователь вошел под именем: user
+2025-05-20 18:50:29 [nioEventLoopGroup-3-1] INFO  ru.almaz.server.handler.MainHandler - #b7ee3226: Сообщение - create topic -n=topic
+2025-05-20 18:50:29 [nioEventLoopGroup-3-1] INFO  r.almaz.server.service.TopicService - #b7ee3226: Создал топик с именем: topic
+2025-05-20 18:50:39 [nioEventLoopGroup-3-1] INFO  ru.almaz.server.handler.MainHandler - #b7ee3226: Сообщение - create vote -t=topic -n=vote
+2025-05-20 18:50:39 [nioEventLoopGroup-3-1] WARN  ru.almaz.server.service.VoteService - #b7ee3226: Топик с именем: topic -n=vote не существует
+2025-05-20 18:51:01 [nioEventLoopGroup-3-1] INFO  ru.almaz.server.handler.MainHandler - #b7ee3226: Сообщение - create vote -t=topic
+2025-05-20 18:51:07 [nioEventLoopGroup-3-1] INFO  ru.almaz.server.handler.VoteHandler - #b7ee3226: Сообщение - Голосование
+2025-05-20 18:51:12 [nioEventLoopGroup-3-1] INFO  ru.almaz.server.handler.VoteHandler - #b7ee3226: Сообщение - Голосование
+2025-05-20 18:51:14 [nioEventLoopGroup-3-1] INFO  ru.almaz.server.handler.VoteHandler - #b7ee3226: Сообщение - 3
+2025-05-20 18:51:15 [nioEventLoopGroup-3-1] INFO  ru.almaz.server.handler.VoteHandler - #b7ee3226: Сообщение - 1
+2025-05-20 18:51:16 [nioEventLoopGroup-3-1] INFO  ru.almaz.server.handler.VoteHandler - #b7ee3226: Сообщение - 2
+2025-05-20 18:51:16 [nioEventLoopGroup-3-1] INFO  ru.almaz.server.handler.VoteHandler - #b7ee3226: Сообщение - 3
+2025-05-20 18:51:16 [nioEventLoopGroup-3-1] INFO  ru.almaz.server.service.VoteService - #b7ee3226: Cоздал голосование с именем: Голосование
+2025-05-20 19:02:16 [main] INFO  ru.almaz.server.Server - Сервер запущен на порту 8080
+2025-05-20 19:02:20 [nioEventLoopGroup-3-1] INFO  ru.almaz.server.handler.MainHandler - #e8184af0: Пользователь подключился
+2025-05-20 19:02:33 [nioEventLoopGroup-3-1] INFO  ru.almaz.server.handler.MainHandler - #e8184af0: Сообщение - login -u=user
+2025-05-20 19:02:33 [nioEventLoopGroup-3-1] INFO  r.almaz.server.service.LoginService - #e8184af0: Пользователь вошел под именем: user
+2025-05-20 19:02:39 [nioEventLoopGroup-3-1] INFO  ru.almaz.server.handler.MainHandler - #e8184af0: Сообщение - create topic -n=topic
+2025-05-20 19:02:39 [nioEventLoopGroup-3-1] INFO  r.almaz.server.service.TopicService - #e8184af0: Создал топик с именем: topic
+2025-05-20 19:02:51 [nioEventLoopGroup-3-1] INFO  ru.almaz.server.handler.MainHandler - #e8184af0: Сообщение - create vote -t=topic
+2025-05-20 19:02:52 [nioEventLoopGroup-3-1] INFO  ru.almaz.server.handler.VoteHandler - #e8184af0: Сообщение - vote
+2025-05-20 19:02:54 [nioEventLoopGroup-3-1] INFO  ru.almaz.server.handler.VoteHandler - #e8184af0: Сообщение - vote
+2025-05-20 19:02:56 [nioEventLoopGroup-3-1] INFO  ru.almaz.server.handler.VoteHandler - #e8184af0: Сообщение - 3
+2025-05-20 19:02:58 [nioEventLoopGroup-3-1] INFO  ru.almaz.server.handler.VoteHandler - #e8184af0: Сообщение - lf
+2025-05-20 19:03:00 [nioEventLoopGroup-3-1] INFO  ru.almaz.server.handler.VoteHandler - #e8184af0: Сообщение - no
+2025-05-20 19:03:03 [nioEventLoopGroup-3-1] INFO  ru.almaz.server.handler.VoteHandler - #e8184af0: Сообщение - ty
+2025-05-20 19:03:03 [nioEventLoopGroup-3-1] INFO  ru.almaz.server.service.VoteService - #e8184af0: Cоздал голосование с именем: vote
+2025-05-20 19:03:12 [nioEventLoopGroup-3-1] INFO  ru.almaz.server.handler.MainHandler - #e8184af0: Сообщение - view
+2025-05-20 19:03:21 [nioEventLoopGroup-3-1] INFO  ru.almaz.server.handler.MainHandler - #e8184af0: Сообщение - view -t=topic
+2025-05-20 19:03:29 [nioEventLoopGroup-3-1] INFO  ru.almaz.server.handler.MainHandler - #e8184af0: Сообщение - view -t=topic -v=vote
+2025-05-20 19:03:38 [nioEventLoopGroup-3-1] INFO  ru.almaz.server.handler.MainHandler - #e8184af0: Сообщение - vote -t=topic -v=vote
+2025-05-20 19:03:40 [nioEventLoopGroup-3-1] INFO  r.almaz.server.handler.AnswerHandler - #e8184af0: Сообщение - 2
+2025-05-20 19:03:40 [nioEventLoopGroup-3-1] INFO  ru.almaz.server.service.VoteService - #e8184af0: Выбрал 2Вариант ответа для голосования: vote
+2025-05-20 19:03:54 [nioEventLoopGroup-3-1] INFO  ru.almaz.server.handler.MainHandler - #e8184af0: Сообщение - view -t=topic -v=vote
+2025-05-20 19:04:08 [nioEventLoopGroup-3-1] INFO  ru.almaz.server.handler.MainHandler - #e8184af0: Сообщение - delete -t=topic -v=vote
+2025-05-20 19:04:22 [nioEventLoopGroup-3-1] INFO  ru.almaz.server.handler.MainHandler - #e8184af0: Сообщение - view

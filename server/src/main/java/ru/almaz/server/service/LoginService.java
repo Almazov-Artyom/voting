@@ -3,10 +3,12 @@ package ru.almaz.server.service;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandlerContext;
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 import ru.almaz.server.storage.UserStorage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+@Service
 @RequiredArgsConstructor
 public class LoginService {
     private static final org.slf4j.Logger logger = LoggerFactory.getLogger(LoginService.class);
