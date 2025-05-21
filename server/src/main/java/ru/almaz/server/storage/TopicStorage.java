@@ -9,7 +9,7 @@ import java.util.Optional;
 
 @Component
 public class TopicStorage {
-    private static List<Topic> topics = new ArrayList<>();
+    private List<Topic> topics = new ArrayList<>();
 
     public boolean isTopicExists(String topicName) {
         return topics.stream().anyMatch(topic -> topic.getName().equals(topicName));
@@ -31,6 +31,6 @@ public class TopicStorage {
     }
 
     public void setTopics(List<Topic> topics) {
-        TopicStorage.topics = topics;
+        this.topics = topics;
     }
 }

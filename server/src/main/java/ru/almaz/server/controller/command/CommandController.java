@@ -1,11 +1,8 @@
-package ru.almaz.server.controller;
+package ru.almaz.server.controller.command;
 
 import io.netty.channel.ChannelHandlerContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import ru.almaz.server.service.ClientCommandService;
-
-import java.util.function.BiConsumer;
-import java.util.function.ObjIntConsumer;
 
 public interface CommandController {
     void accept(ChannelHandlerContext ctx, String message);

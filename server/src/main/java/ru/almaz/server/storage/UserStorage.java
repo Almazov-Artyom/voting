@@ -8,7 +8,7 @@ import java.util.Map;
 
 @Component
 public class UserStorage {
-    private static final Map<Channel, String> users = new HashMap<>();
+    private final Map<Channel, String> users = new HashMap<>();
 
     public void deleteUser(Channel channel) {
         users.remove(channel);

@@ -120,3 +120,45 @@
 2025-05-20 21:38:39 [nioEventLoopGroup-3-1] INFO  r.almaz.server.handler.AnswerHandler - #f8e04c4b: Сообщение - 1
 2025-05-20 21:38:39 [nioEventLoopGroup-3-1] INFO  ru.almaz.server.service.VoteService - #f8e04c4b: Выбрал 1Вариант ответа для голосования: vote
 2025-05-20 21:38:46 [nioEventLoopGroup-3-1] INFO  ru.almaz.server.handler.MainHandler - #f8e04c4b: Сообщение - view -t=topic -v=vote
+2025-05-21 17:45:44 [main] INFO  ru.almaz.server.Server - Сервер запущен на порту 8080
+2025-05-21 17:45:49 [nioEventLoopGroup-3-1] INFO  ru.almaz.server.handler.MainHandler - #c60fb03a: Пользователь подключился
+2025-05-21 17:46:01 [nioEventLoopGroup-3-1] INFO  ru.almaz.server.handler.MainHandler - #c60fb03a: Сообщение - user -u=user
+2025-05-21 17:46:07 [nioEventLoopGroup-3-1] INFO  ru.almaz.server.handler.MainHandler - #c60fb03a: Сообщение - login -u=user
+2025-05-21 17:46:07 [nioEventLoopGroup-3-1] INFO  r.almaz.server.service.LoginService - #c60fb03a: Пользователь вошел под именем: user
+2025-05-21 17:46:14 [nioEventLoopGroup-3-1] INFO  ru.almaz.server.handler.MainHandler - #c60fb03a: Сообщение - create topic -n=topic
+2025-05-21 17:46:14 [nioEventLoopGroup-3-1] INFO  r.almaz.server.service.TopicService - #c60fb03a: Создал топик с именем: topic
+2025-05-21 17:46:24 [nioEventLoopGroup-3-1] INFO  ru.almaz.server.handler.MainHandler - #c60fb03a: Сообщение - create vote -t=topic
+2025-05-21 17:46:25 [nioEventLoopGroup-3-1] INFO  ru.almaz.server.handler.VoteHandler - #c60fb03a: Сообщение - vote
+2025-05-21 17:46:28 [nioEventLoopGroup-3-1] INFO  ru.almaz.server.handler.VoteHandler - #c60fb03a: Сообщение - vote
+2025-05-21 17:46:30 [nioEventLoopGroup-3-1] INFO  ru.almaz.server.handler.VoteHandler - #c60fb03a: Сообщение - 3
+2025-05-21 17:46:35 [nioEventLoopGroup-3-1] INFO  ru.almaz.server.handler.VoteHandler - #c60fb03a: Сообщение - yes
+2025-05-21 17:46:37 [nioEventLoopGroup-3-1] INFO  ru.almaz.server.handler.VoteHandler - #c60fb03a: Сообщение - no
+2025-05-21 17:46:39 [nioEventLoopGroup-3-1] INFO  ru.almaz.server.handler.VoteHandler - #c60fb03a: Сообщение - maybe
+2025-05-21 17:46:39 [nioEventLoopGroup-3-1] INFO  r.a.s.c.v.CreateVoteStepOptionController - #c60fb03a: Cоздал голосование с именем: vote
+2025-05-21 17:46:51 [nioEventLoopGroup-3-1] INFO  ru.almaz.server.handler.MainHandler - #c60fb03a: Сообщение - view -t=topic -v=vote
+2025-05-21 18:05:31 [nioEventLoopGroup-3-1] INFO  ru.almaz.server.handler.MainHandler - #c60fb03a: Пользователь отключился
+2025-05-21 18:05:33 [nioEventLoopGroup-3-2] INFO  ru.almaz.server.handler.MainHandler - #669f8abf: Пользователь подключился
+2025-05-21 18:05:40 [main] INFO  ru.almaz.server.Server - Сервер запущен на порту 8080
+2025-05-21 18:05:45 [nioEventLoopGroup-3-1] INFO  ru.almaz.server.handler.MainHandler - #488115b6: Пользователь подключился
+2025-05-21 18:05:51 [nioEventLoopGroup-3-1] INFO  ru.almaz.server.handler.MainHandler - #488115b6: Сообщение - login -u=user
+2025-05-21 18:05:51 [nioEventLoopGroup-3-1] INFO  r.almaz.server.service.LoginService - #488115b6: Пользователь вошел под именем: user
+2025-05-21 18:05:57 [nioEventLoopGroup-3-1] INFO  ru.almaz.server.handler.MainHandler - #488115b6: Сообщение - create topic -n=topic
+2025-05-21 18:05:57 [nioEventLoopGroup-3-1] INFO  r.almaz.server.service.TopicService - #488115b6: Создал топик с именем: topic
+2025-05-21 18:06:16 [nioEventLoopGroup-3-1] INFO  ru.almaz.server.handler.MainHandler - #488115b6: Сообщение - create vote -t=topic
+2025-05-21 18:06:19 [nioEventLoopGroup-3-1] INFO  ru.almaz.server.handler.VoteHandler - #488115b6: Сообщение - vote
+2025-05-21 18:06:20 [nioEventLoopGroup-3-1] INFO  ru.almaz.server.handler.VoteHandler - #488115b6: Сообщение - vote
+2025-05-21 18:06:21 [nioEventLoopGroup-3-1] INFO  ru.almaz.server.handler.VoteHandler - #488115b6: Сообщение - 3
+2025-05-21 18:06:23 [nioEventLoopGroup-3-1] INFO  ru.almaz.server.handler.VoteHandler - #488115b6: Сообщение - yes
+2025-05-21 18:06:25 [nioEventLoopGroup-3-1] INFO  ru.almaz.server.handler.VoteHandler - #488115b6: Сообщение - no
+2025-05-21 18:06:28 [nioEventLoopGroup-3-1] INFO  ru.almaz.server.handler.VoteHandler - #488115b6: Сообщение - maybe
+2025-05-21 18:06:28 [nioEventLoopGroup-3-1] INFO  r.a.s.c.v.CreateVoteStepOptionController - #488115b6: Cоздал голосование с именем: vote
+2025-05-21 18:06:36 [nioEventLoopGroup-3-1] INFO  ru.almaz.server.handler.MainHandler - #488115b6: Сообщение - view -t=topic -v=vote
+2025-05-21 18:08:08 [nioEventLoopGroup-3-2] INFO  ru.almaz.server.handler.MainHandler - #3cb9c8d4: Пользователь подключился
+2025-05-21 18:08:25 [nioEventLoopGroup-3-2] INFO  ru.almaz.server.handler.MainHandler - #3cb9c8d4: Сообщение - login -u=user
+2025-05-21 18:08:25 [nioEventLoopGroup-3-2] WARN  r.almaz.server.service.LoginService - #3cb9c8d4: Пользователь: user уже вошел
+2025-05-21 18:08:32 [nioEventLoopGroup-3-2] INFO  ru.almaz.server.handler.MainHandler - #3cb9c8d4: Сообщение - login -u=user1
+2025-05-21 18:08:32 [nioEventLoopGroup-3-2] INFO  r.almaz.server.service.LoginService - #3cb9c8d4: Пользователь вошел под именем: user1
+2025-05-21 18:08:38 [nioEventLoopGroup-3-2] INFO  ru.almaz.server.handler.MainHandler - #3cb9c8d4: Сообщение - create topic -n=topic
+2025-05-21 18:08:38 [nioEventLoopGroup-3-2] WARN  r.almaz.server.service.TopicService - #3cb9c8d4: Топик с именем: topic уже есть
+2025-05-21 18:09:03 [nioEventLoopGroup-3-2] INFO  ru.almaz.server.handler.MainHandler - #3cb9c8d4: Сообщение - view -t=topic
+2025-05-21 18:09:06 [nioEventLoopGroup-3-2] INFO  ru.almaz.server.handler.MainHandler - #3cb9c8d4: Сообщение - view

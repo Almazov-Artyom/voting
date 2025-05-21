@@ -1,4 +1,4 @@
-package ru.almaz.server.controller;
+package ru.almaz.server.controller.command;
 
 import io.netty.channel.ChannelHandlerContext;
 import lombok.RequiredArgsConstructor;
@@ -8,19 +8,20 @@ import ru.almaz.server.service.TopicService;
 
 @Component
 @RequiredArgsConstructor
-public class ViewPrefixTController implements CommandController{
-    @Value("${client.template.command.view.prefixT}")
-    private String viewTemplate;
+public class CreateTopicCommandController implements CommandController {
+
+    @Value("${client.template.command.create.topic}")
+    private String createTopicTemplate;
 
     private final TopicService topicService;
 
     @Override
     public void accept(ChannelHandlerContext ctx, String message) {
-        topicService.viewPrefixT(ctx, message);
+        topicService.createTopic(ctx, message);
     }
 
     @Override
     public String getTemplateCommand() {
-        return viewTemplate;
+        return createTopicTemplate;
     }
 }

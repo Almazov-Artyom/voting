@@ -19,7 +19,7 @@ public class VoteCreateSession {
     public VoteCreateSession(Topic topic) {
         this.topic = topic;
         this.vote = new Vote();
-        this.step = 0;
+        this.step = 1;
         this.optionsCount = 0;
     }
 

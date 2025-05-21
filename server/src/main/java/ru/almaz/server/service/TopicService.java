@@ -2,6 +2,7 @@ package ru.almaz.server.service;
 
 import io.netty.channel.ChannelHandlerContext;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import ru.almaz.server.model.Topic;
 import ru.almaz.server.storage.TopicStorage;
@@ -13,9 +14,8 @@ import org.slf4j.LoggerFactory;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class TopicService {
-    private static final org.slf4j.Logger logger = LoggerFactory.getLogger(TopicService.class);
-
     private final TopicStorage topicStorage;
 
     public void createTopic(ChannelHandlerContext ctx, String msg) {
@@ -23,10 +23,10 @@ public class TopicService {
         if (!topicStorage.isTopicExists(topicName)) {
             topicStorage.saveTopic(new Topic(topicName));
             ctx.writeAndFlush(String.format("Вы создали топик с именем: %s\n", topicName));
-            logger.info("#" + ctx.channel().id() + ": Создал топик с именем: " + topicName);
+            log.info("#{}: Создал топик с именем: {}", ctx.channel().id(), topicName);
         } else {
             ctx.writeAndFlush("Топик с таким именем уже существует\n");
-            logger.warn("#" + ctx.channel().id() + ": Топик с именем: " + topicName + " уже есть");
+            log.warn("#{}: Топик с именем: {} уже есть", ctx.channel().id(), topicName);
         }
 
     }
@@ -51,7 +51,7 @@ public class TopicService {
                         .forEach(vote -> ctx.writeAndFlush(vote.getName() + "\n")),
                 () -> {
                     ctx.writeAndFlush("Такого топика не существует\n");
-                    logger.warn("#" + ctx.channel().id() + ": Топика с именем: " + topicName + " не существует");
+                    log.warn("#{}: Топика с именем: {} не существует", ctx.channel().id(), topicName);
 
                 }
         );

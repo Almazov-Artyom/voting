@@ -3,8 +3,10 @@ package ru.almaz.server.service;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandlerContext;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.tuple.Pair;
 import org.springframework.stereotype.Service;
+import ru.almaz.server.controller.vote.CreateVoteStepController;
 import ru.almaz.server.factory.HandlerFactory;
 import ru.almaz.server.manager.VoteManager;
 import ru.almaz.server.model.Topic;
@@ -17,17 +19,15 @@ import ru.almaz.server.storage.UserStorage;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class VoteService {
-    private static final org.slf4j.Logger logger = LoggerFactory.getLogger(VoteService.class);
+    private final Map<Channel, VoteCreateSession> activeCreateSessions = new HashMap<>();
 
-    private static final Map<Channel, VoteCreateSession> activeCreateSessions = new HashMap<>();
+    private final Map<Channel, AnswerSession> activeAnswerSessions = new HashMap<>();
 
-    private static final Map<Channel, AnswerSession> activeAnswerSessions = new HashMap<>();
+    private final Map<Integer, CreateVoteStepController> createVoteStepControllers = new HashMap<>();
 
     private final UserStorage userStorage;
 
@@ -45,18 +45,22 @@ public class VoteService {
         Topic topic = topicStorage.findTopicByName(topicName).orElse(null);
         if (topic == null) {
             ctx.writeAndFlush("Такого топика не существует\n");
-            logger.warn("#" + ctx.channel().id() + ": Топик с именем: " + topicName + " не существует");
+            log.warn("#{}: Топик с именем: {} не существует", ctx.channel().id(), topicName);
             return Optional.empty();
         }
 
         Vote vote = voteManager.findVoteByTopic(topic, voteName).orElse(null);
         if (vote == null) {
             ctx.writeAndFlush("Такого голосования не существует\n");
-            logger.warn("#" + ctx.channel().id() + ": Голосования с именем: " + voteName + " не существует");
+            log.warn("#{}: Голосования с именем: {} не существует", ctx.channel().id(), voteName);
             return Optional.empty();
         }
 
         return Optional.of(Pair.of(topic, vote));
+    }
+
+    public void register(CreateVoteStepController createVoteStepController) {
+        createVoteStepControllers.put(createVoteStepController.getVoteStep(), createVoteStepController);
     }
 
     public void startCreateVote(ChannelHandlerContext ctx, String msg) {
@@ -66,7 +70,7 @@ public class VoteService {
 
         if (topic == null) {
             ctx.writeAndFlush("Такого топика не существует\n");
-            logger.warn("#" + ctx.channel().id() + ": Топик с именем: " + topicName + " не существует");
+            log.warn("#{}: Топик с именем:{} не существует",ctx.channel().id(), topicName);
         } else {
             activeCreateSessions.put(ctx.channel(), new VoteCreateSession(topic));
             ctx.writeAndFlush("Введите название голосования\n");
@@ -77,69 +81,8 @@ public class VoteService {
 
     public void activeCreateVote(ChannelHandlerContext ctx, String msg) {
         VoteCreateSession session = activeCreateSessions.get(ctx.channel());
-        switch (session.getStep()) {
-            case 0:
-                if (msg.isEmpty())
-                    ctx.writeAndFlush("Название голосования не может быть пустым\n");
-                else if (voteManager.isVoteInTopicExists(session.getTopic(), msg)) {
-                    ctx.writeAndFlush("Такое голосование уже есть\n");
-                    logger.warn("#" + ctx.channel().id() + ": Голосования с именем: " +
-                            session.getVote().getName() + " уже есть");
-                } else {
-                    session.setVoteName(msg);
-                    session.setVoteUserCreator(userStorage.findUserByChannel(ctx.channel()));
-                    session.nextStep();
-                    ctx.writeAndFlush("Введите тему голосования\n");
-                }
-                break;
-            case 1:
-                if (msg.isEmpty())
-                    ctx.writeAndFlush("Тема голосования не может быть пустой\n");
-                else {
-                    session.setVoteDescription(msg);
-                    session.nextStep();
-                    ctx.writeAndFlush("Введите количество вариантов ответов\n");
-                }
-                break;
-            case 2:
-                int optionsCount = 0;
-                try {
-                    optionsCount = Integer.parseInt(msg);
-                } catch (NumberFormatException e) {
-                    ctx.writeAndFlush("Некорректное значение\n");
-                    logger.warn("#" + ctx.channel().id() + ": Некорректное значение для количества ответов");
-                    return;
-                }
-                if (optionsCount <= 0) {
-                    ctx.writeAndFlush("Число должно быть больше 0\n");
-                    logger.warn("#" + ctx.channel().id() + ": Некорректное значение для количества ответов");
-                } else {
-                    session.setOptionsCount(optionsCount);
-                    session.nextStep();
-                    ctx.writeAndFlush("Введите 1 вариант ответа\n");
-                }
-                break;
-            case 3:
-                if (msg.isEmpty())
-                    ctx.writeAndFlush("Вариант ответа не может быть пустым\n");
-                else if (session.canAddOption()) {
-                    session.addAnswerOptionToVote(msg);
-                    if (!session.canAddOption()) {
-                        ctx.pipeline().removeLast();
-                        ctx.pipeline().addLast(handlerFactory.getMainHandler());
-                        session.addVoteInTopic();
-                        ctx.writeAndFlush(
-                                String.format("Вы создали голосование: %s\n", session.getVote().getName())
-                        );
-                        logger.info("#" + ctx.channel().id() + ": Cоздал голосование с именем: " + session.getVote().getName());
-                        break;
-                    }
-                    ctx.writeAndFlush(
-                            String.format("Введите %s вариант ответа\n", session.getAnswerOptionCount() + 1)
-                    );
-                }
-                break;
-        }
+        CreateVoteStepController createVoteStepController = createVoteStepControllers.get(session.getStep());
+        createVoteStepController.accept(session,ctx,msg);
     }
 
     public void view(ChannelHandlerContext ctx, String msg) {
@@ -161,7 +104,7 @@ public class VoteService {
             Vote vote = pair.getRight();
             if (vote.getAnswerUsers().contains(userStorage.findUserByChannel(ctx.channel()))) {
                 ctx.writeAndFlush("Вы уже отвечали\n");
-                logger.warn("#" + ctx.channel().id() + ": уже отвечал на голосование: " + vote.getName());
+                log.warn("#{}: уже отвечал на голосование: {}", ctx.channel().id(), vote.getName());
                 return;
             }
             AtomicInteger numberAnswer = new AtomicInteger(1);
@@ -187,7 +130,7 @@ public class VoteService {
             numberAnswer = Integer.parseInt(msg);
         } catch (NumberFormatException e) {
             ctx.writeAndFlush("Недопустимое значение\n");
-            logger.warn("#" + ctx.channel().id() + ": Недопустимое значение для ответа");
+            log.warn("#{}: Недопустимое значение для ответа", ctx.channel().id());
             return;
         }
 
@@ -196,11 +139,10 @@ public class VoteService {
             ctx.pipeline().removeLast();
             ctx.pipeline().addLast(handlerFactory.getMainHandler());
             ctx.writeAndFlush(String.format("Вы выбрали %d вариант\n", numberAnswer));
-            logger.info("#" + ctx.channel().id() + ": Выбрал " + numberAnswer +
-                    "Вариант ответа для голосования: " + answerSession.getVoteName());
+            log.info("#{}: Выбрал {}Вариант ответа для голосования: {}", ctx.channel().id(), numberAnswer, answerSession.getVoteName());
         } else {
             ctx.writeAndFlush("Такого ответа нет\n");
-            logger.warn("#" + ctx.channel().id() + " Варианта " + numberAnswer + " нет");
+            log.warn("#{} Варианта {} нет", ctx.channel().id(), numberAnswer);
         }
     }
 
@@ -212,7 +154,7 @@ public class VoteService {
                 topic.getVotes().remove(vote);
             } else {
                 ctx.writeAndFlush("Голосование может удалить только пользователь, создавший его\n");
-                logger.warn("#" + ctx.channel().id() + "Голосование может удалить только пользователь, создавший его");
+                log.warn("#{}Голосование может удалить только пользователь, создавший его", ctx.channel().id());
             }
         });
     }

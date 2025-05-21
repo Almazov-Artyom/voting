@@ -2,10 +2,11 @@ package ru.almaz.server.service;
 
 import io.netty.channel.ChannelHandlerContext;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import ru.almaz.server.controller.CommandController;
+import ru.almaz.server.controller.command.CommandController;
 
 
 import java.util.HashMap;
@@ -13,11 +14,10 @@ import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class ClientCommandService {
     @Value("${client.template.command.login}")
     private String loginTemplateCommand;
-
-    private static final org.slf4j.Logger logger = LoggerFactory.getLogger(ClientCommandService.class);
 
     private final Map<String, CommandController> commandControllers = new HashMap<>();
 
@@ -44,6 +44,6 @@ public class ClientCommandService {
             }
         }
         ctx.writeAndFlush("Неверная команда\n");
-        logger.warn("#" + ctx.channel().id() + ": Неверная команда - " + msg);
+        log.warn("#{}: Неверная команда - {}", ctx.channel().id(), msg);
     }
 }

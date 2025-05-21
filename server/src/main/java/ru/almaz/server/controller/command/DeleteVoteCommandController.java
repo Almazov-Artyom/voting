@@ -1,4 +1,4 @@
-package ru.almaz.server.controller;
+package ru.almaz.server.controller.command;
 
 import io.netty.channel.ChannelHandlerContext;
 import lombok.RequiredArgsConstructor;
@@ -8,19 +8,19 @@ import ru.almaz.server.service.VoteService;
 
 @Component
 @RequiredArgsConstructor
-public class ViewPrefixTPrefixVController implements CommandController{
-    @Value("${client.template.command.view.prefixT.prefixV}")
-    private String viewTemplate;
+public class DeleteVoteCommandController implements CommandController {
+    @Value("${client.template.command.delete.vote}")
+    private String deleteVoteTemplate;
 
     private final VoteService voteService;
 
     @Override
     public void accept(ChannelHandlerContext ctx, String message) {
-        voteService.view(ctx, message);
+        voteService.deleteVote(ctx, message);
     }
 
     @Override
     public String getTemplateCommand() {
-        return viewTemplate;
+        return deleteVoteTemplate;
     }
 }

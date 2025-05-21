@@ -1,4 +1,4 @@
-package ru.almaz.server.controller;
+package ru.almaz.server.controller.command;
 
 import io.netty.channel.ChannelHandlerContext;
 import lombok.RequiredArgsConstructor;
